@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block dashboard_content %}
+<h2>Dashboard</h2>
+<div class="row g-3">
+    <div class="col-md-3"><div class="card text-white bg-primary"><div class="card-body"><h5>Total Farmers</h5><h3>{{ total_farmers }}</h3></div></div></div>
+    <div class="col-md-3"><div class="card text-white bg-success"><div class="card-body"><h5>Active Farmers</h5><h3>{{ active_farmers }}</h3></div></div></div>
+    <div class="col-md-3"><div class="card text-white bg-warning"><div class="card-body"><h5>Total Loans</h5><h3>{{ total_loans }}</h3></div></div></div>
+    <div class="col-md-3"><div class="card text-white bg-danger"><div class="card-body"><h5>Ongoing Loans</h5><h3>{{ ongoing_loans }}</h3></div></div></div>
+</div>
+<div class="row mt-4">
+    <div class="col-md-6"><h4>Recent Loans</h4><ul class="list-group">{% for loan in recent_loans %}<li class="list-group-item">{{ loan.farmer }} - {{ loan.total_value }} ({{ loan.status }})</li>{% empty %}<li class="list-group-item">No loans</li>{% endfor %}</ul></div>
+    <div class="col-md-6"><h4>Recent Payments</h4><ul class="list-group">{% for payment in recent_payments %}<li class="list-group-item">{{ payment.farmer }} - ₱{{ payment.amount_paid }}</li>{% empty %}<li class="list-group-item">No payments</li>{% endfor %}</ul></div>
+</div>
+{% endblock %}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Farmer Loan Tracker {% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .sidebar-minimized {
+            width: 70px !important;
+            flex: 0 0 70px !important;
+            max-width: 70px !important;
+        }
+
+        .sidebar-minimized .nav-link span {
+            display: none;
+        }
+
+        .sidebar-minimized h5 {
+            display: none;
+        }
+
+        .sidebar-minimized .nav-link {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .sidebar-minimized .nav-link i {
+            font-size: 1.5rem;
+        }
+
+        .sidebar-transition {
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-minimized ~ #mainContent {
+            margin-left: 0;
+        }
+
+        #mainContent {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+<!-- Top Bar -->
+{% include 'homepage/top_bar.html' %}
+<!-- Main Content -->
+{% if user.is_authenticated %}
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-2 d-md-block bg-light sidebar collapse sidebar-transition" id="sidebarCollapse"
+                 style="min-height:100vh; padding:20px;">
+                <button class="btn btn-outline-secondary btn-sm mb-3" id="toggleSidebarBtn" style="width:100%;">◀
+                    Collapse
+                </button>
+                <h5>Menu</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}"><i>📊</i>
+                        <span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/farmers/farmer/"><i>👨‍🌾</i>
+                        <span>Farmers</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/farmers/farmerloan/"><i>💰</i>
+                        <span>Loans</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/farmers/payment/"><i>💳</i>
+                        <span>Payments</span></a></li>
+                </ul>
+            </nav>
+            <!-- Main content -->
+            <main class="col-md-10 ms-sm-auto px-4 py-4 sidebar-transition" id="mainContent">
+                <button class="btn btn-primary d-md-none mb-3" data-bs-toggle="collapse"
+                        data-bs-target="#sidebarCollapse">☰
+                    Toggle Menu
+                </button>
+                {% block dashboard_content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+{% else %}
+    <main class="container py-4">
+        {% block content %}{% endblock %}
+    </main>
+{% endif %}
+<!-- Footer -->
+{% include 'homepage/footer.html' %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('toggleSidebarBtn').addEventListener('click', function () {
+        const sidebar = document.getElementById('sidebarCollapse');
+        sidebar.classList.toggle('sidebar-minimized');
+        this.textContent = sidebar.classList.contains('sidebar-minimized') ? '▶ ' : '◀ Collapse';
+    });
+</script>
+</body>
+</html>

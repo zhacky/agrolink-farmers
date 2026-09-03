@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Hero Section -->
+    <section class="bg-light text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Welcome to Farmers Management</h1>
+            {% load static %}
+            <img src="{% static 'images/agriculture.jpg' %}" alt="Hero" class="img-fluid my-3"
+                 style="max-height:400px;">
+            <p class="lead">Manage farmers, loans, and payments efficiently.</p>
+        </div>
+    </section>
+    <!-- Content Section -->
+    <div style="text-align: center;">
+        <h2>AAJ Agrolink - Lanao del Sur</h2>
+        <p>Wao - Piagapo - Wato - Madalum</p>
+    </div>
+{% endblock %}
