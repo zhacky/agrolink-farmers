@@ -144,3 +144,15 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGIN_URL = '/login/'
 LOGOUT_REDIRECT_URL = 'home'
+
+# 1. Trust the Cloud Run proxy headers
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# 2. Tell Django your explicit live website URLs are trusted origins
+CSRF_TRUSTED_ORIGINS = [
+    'https://run.app',
+]
+
+# 3. Optional: Secure the session cookies if using HTTPS
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
